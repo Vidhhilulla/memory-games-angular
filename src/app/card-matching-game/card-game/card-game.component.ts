@@ -16,6 +16,11 @@ export class CardGameComponent
 
   selectedObjects1!: any[];
   selectedObjects2!: any[];
+  count:number=0
+   myArray: Array<String> = [];
+
+
+
 
 
 
@@ -28,18 +33,45 @@ export class CardGameComponent
 
   selectedCard: number | null = null;
 
-onCardClick(cardNumber: number): void 
+onCardClick(card: any): void 
 {
-  console.log(`Clicked on card ${cardNumber}`);
-  this.selectedCard = cardNumber;
+  this.count =this.count+1;
+  console.log(`Clicked on card ${card.number}`);
+  this.selectedCard = card.number;
+  this.myArray.push(card.color)
+  
+
+
+  card.isSelected = !card.isSelected; // Toggle the isSelected property
+  if(this.count%2==0)
+  {
+    if(this.myArray[0]!=this.myArray[1])
+    {
+      console.log("Not equal")
+
+
+
+    }
+    else
+    {
+      console.log("equal")
+
+    }
+    this.myArray=[];
+
+  }
 
 }
 
 
 
 
+
+
   // id and level_id samjho peche se aaya
   // and by using some logic noOfCards bhi aaya
+
+
 
 
 
@@ -84,7 +116,7 @@ onCardClick(cardNumber: number): void
       usedNumbers.add(randomNumber);
   
       const randomColor = this.selectedColor[i % this.selectedColor.length];
-      objects.push({ number: randomNumber, color: randomColor });
+      objects.push({ number: randomNumber, color: randomColor, isSelected: false }); // Add isSelected property initialized to false
     }
   
     return objects;
@@ -96,3 +128,4 @@ onCardClick(cardNumber: number): void
 
 
 }
+
